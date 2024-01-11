@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta name="description" content="HSL">
+    <meta name="author" content="Wesley Tsai, Mlytics">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> （Assets）Mlytics VOD Demo - Video.js </title>
+  <link href="https://vjs.fusioncdn.com/7.21.4/video-js.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css" rel="stylesheet">
+  <script src="https://vjs.fusioncdn.com/7.21.4/video.min.js"></script>
+  <!-- Configuration might be different along with Stream. -->
+  <script src="https://sdkjs.fusioncdn.com/cemlg71hsea70gdoh050-mlysdk.js"></script>
+  <script src="https://jsdelivr.fusioncdn.com/npm/@mlytics/p2sp-sdk@latest/bundle/driver.min.js"></script>
+  <script src="https://jsdelivr.fusioncdn.com/npm/@mlytics/p2sp-sdk@latest/bundle/peripheral/player/videojs-hls.min.js"></script>
+<link href="https://sit-ome.pcdn.gordon.cf/m/css/main.css" rel="stylesheet" />
+  <style>
+    body {
+        background-color: rgb(53, 79, 82);
+        text-align: center;
+    }
+
+    h1 {
+        color: rgb(102, 186, 183);
+    }
+
+    .video {
+        width: 100%;
+        max-width: 800px;
+        display: inline-block;
+    }
+  </style>
+</head>
+
+<body onload=updateClock()>
+  <div class="video-holder">
+        <div class="gmt-clock">
+          <span id="ct"></span>
+        </div>
+        <center>
+        <video id="video" class="video-js vjs-theme-fantasy"  style="width: 800px; height: 640px;"></video>
+        </center>
+
+  </div>
+<script src="https://sit-ome.pcdn.gordon.cf/m/js/misc.js"></script>
+  <script>
+    const driver = mlysdk.driver.initialize()
+
+    const src = "https://1001672292743-cloudfront-9hx4cnps.d-apm.com/hls/cf4112d8-8ff1-4e59-8464-e227047ebcbf.mp4/cf4112d8-8ff1-4e59-8464-e227047ebcbf.m3u8"
+    const video = document.getElementById('video')
+    const adapter = driver.extensions.VideojsHlsPlayerPlugin.create(video, {
+      autoplay: true,
+      controls: true,
+      sources: [{
+        src,
+        type: 'application/vnd.apple.mpegurl'
+      }]
+    })
+    const videojsPlayer = adapter.player;
+
+  </script>
+</body>
+</html>
